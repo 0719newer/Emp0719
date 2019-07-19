@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class EmpService {
     @Autowired
@@ -16,5 +18,9 @@ public class EmpService {
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
     public int addEmp(Emp emp){
         return empMapper.addEmp(emp);
+    }
+
+    public List<Emp> select(String ename){
+        return empMapper.select(ename);
     }
 }
