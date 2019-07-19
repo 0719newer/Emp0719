@@ -1,13 +1,14 @@
 server:
-  port: 8080
+  port: 8086
 spring:
   datasource:
-    password: 123456
-    username: root
-    url: jdbc:mysql://localhost/newerstu?useLL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=true
+   password: root
+   username: root
+   url: jdbc:mysql://127.0.0.1:3306/mysql?useSSL=false&serverTimezone=Asia/Shanghai
+   driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
-  type-aliases-package: com.newer.springbootpage.domain
-  mapper-locations: classpath:com/newer/springbootpage/mapper/*.xml
+  type-aliases-package: com.newer.emp.domain
+  mapper-locations: classpath:com/newer/emp/mapper/*.xml
 
 
 
