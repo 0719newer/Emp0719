@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class EmpController {
     @Autowired
     private EmpService empService;
-
+    //sdfjsdfklss
     @RequestMapping("addEmp")
     public int addEmp(Emp emp){
         return empService.addEmp(emp);
