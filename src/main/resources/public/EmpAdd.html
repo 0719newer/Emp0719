@@ -34,30 +34,96 @@
 </div>
 <script src="js/jquery-3.2.1.js" type="text/javascript"></script>
 <script type="text/javascript">
+    var empnos=localStorage.getItem("empno");
+
     $(()=>{
-        $("#btn_add").click(()=>{
-            var empno=$("#empno").val();
-            var ename=$("#ename").val();
-            var job=$("#job").val();
-            var mgr=$("#mgr").val();
-            var comm=$("#comm").val();
-            var sal=$("#sal").val();
-            var deptno=$("#deptno").val();
-            var hiredate=$("#hiredate").val();
-            $.ajax({
-                type:"post",
-                url:"addEmp",
-                data:{"empno":empno,"ename":ename,"job":job,"mgr":mgr,"comm":comm,"deptno":deptno,"hiredate":hiredate,"sal":sal},
-                dataType:"json",
-                success:(data)=>{
-                    console.log(data);
-                    if (data==1){
-                        alert("添加成功")
-                    }
-                }
+        console.log("empno:"+empnos);
+        if(empnos>0){
+            //修改
+            select();
+            $("#titles").text("修改信息")
+            $("#btn_add").click(function () {
+                upadteemp(empno);
             })
-        })
+        }else {
+            $("#titles").text("添加信息")
+            $("#btn_add").click(function () {
+                addemp();
+            })
+
+        }
+
     })
+
+    function select() {
+        //var empno=$("#empno").val();
+        console.log("赋值")
+        $.ajax({
+            type:"post",
+            url:"uppParentMenu",
+            data:{"empno":empnos},
+            dataType:"json",
+            success:(data)=>{
+                console.log(data);
+                $("#empno").val(data.empno);
+                $("#ename").val(data.ename);
+                $("#job").val(data.job);
+                $("#mgr").val(data.mgr);
+                $("#comm").val(data. comm);
+                $("#sal").val(data.sal);
+                $("#deptno").val(data.deptno);
+                $("#hiredate").val(data.hiredate);
+            }
+        })
+    }
+    function upadteemp(empno) {
+        var empno=$("#empno").val();
+        var ename=$("#ename").val();
+        var job=$("#job").val();
+        var mgr=$("#mgr").val();
+        var comm=$("#comm").val();
+        var sal=$("#sal").val();
+        var deptno=$("#deptno").val();
+        var hiredate=$("#hiredate").val();
+        $.ajax({
+            type:"post",
+            url:"saveMenu",
+            data:{"empno":empno,"ename":ename,"job":job,"mgr":mgr,"comm":comm,"deptno":deptno,"hiredate":hiredate,"sal":sal},
+            dataType:"json",
+            success:(data)=>{
+                console.log(data);
+                if (data==1){
+                    alert("修改成功")
+                    location.href="EmpQuery.html";
+
+                }
+            }
+        })
+    }
+    function addemp() {
+        var empno=$("#empno").val();
+        var ename=$("#ename").val();
+        var job=$("#job").val();
+        var mgr=$("#mgr").val();
+        var comm=$("#comm").val();
+        var sal=$("#sal").val();
+        var deptno=$("#deptno").val();
+        var hiredate=$("#hiredate").val();
+        $.ajax({
+            type:"post",
+            url:"addEmp",
+            data:{"empno":empno,"ename":ename,"job":job,"mgr":mgr,"comm":comm,"deptno":deptno,"hiredate":hiredate,"sal":sal},
+            dataType:"json",
+            success:(data)=>{
+                console.log(data);
+                if (data==1){
+                    alert("添加成功")
+                    location.href="EmpQuery.html";
+                }
+            }
+        })
+
+    }
 </script>
 </body>
 </html>
