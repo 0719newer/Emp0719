@@ -2,9 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>添加页面</title>
 </head>
 <body>
-
+<div>
+    <p>员工id：
+        <input type="text" id="empno">
+    </p>
+    <p>员工姓名：
+        <input type="text" id="ename">
+    </p>
+    <p>员工工作：
+        <input type="text" id="job">
+    </p>
+    <p>员工上级：
+        <input type="text" id="mgr">
+    </p>
+    <p>入职日期：
+        <input type="date" id="hiredate">
+    </p>
+    <p>员工薪水：
+        <input type="text" id="sal">
+    </p>
+    <p>员工奖金：
+        <input type="text" id="comm">
+    </p>
+    <p>员工部门：
+        <input type="text" id="deptno">
+    </p>
+    <button type="button" id="btn_add">添加</button>
+</div>
+<script src="js/jquery-3.2.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(()=>{
+        $("#btn_add").click(()=>{
+            var empno=$("#empno").val();
+            var ename=$("#ename").val();
+            var job=$("#job").val();
+            var mgr=$("#mgr").val();
+            var comm=$("#comm").val();
+            var sal=$("#sal").val();
+            var deptno=$("#deptno").val();
+            var hiredate=$("#hiredate").val();
+            $.ajax({
+                type:"post",
+                url:"addEmp",
+                data:{"empno":empno,"ename":ename,"job":job,"mgr":mgr,"comm":comm,"deptno":deptno,"hiredate":hiredate,"sal":sal},
+                dataType:"json",
+                success:(data)=>{
+                    console.log(data);
+                    if (data==1){
+                        alert("添加成功")
+                    }
+                }
+            })
+        })
+    })
+</script>
 </body>
 </html>
