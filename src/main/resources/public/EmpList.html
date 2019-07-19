@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="ename">
+<button id="btnSel">搜索</button>
+<table id="tab">
+
+</table>
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+    $(()=>{
+        $.ajax({
+            url:"select",
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                var temp = `<tr>
+                             <td>员工编号</td>
+                             <td>员工姓名</td>
+                             <td>员工薪水</td>
+                             <td>入职时间</td>
+                              <td>操作</td>
+                           </tr>`;
+                $.each(data,function (i,obj) {
+                    temp+=`
+                           <tr>
+                            <td>`+obj.empno+`</td>
+                            <td>`+obj.ename+`</td>
+                            <td>`+obj.sal+`</td>
+                            <td>`+obj.hiredate+`</td>
+                            <td><button  onclick="upd(`+obj.empno+`)">修改</button>
+                            <button onclick="del(`+obj.empno+`)">删除</button></td>
+                            </tr>`
+                })
+                $("#tab").html(temp);
+            }
+        })
+
+        $("#btnSel").click(()=>{
+            var ename = $("#ename").val();
+            $.ajax({
+                url:"select",
+                type:"post",
+                data:{"ename":ename},
+                dataType:"json",
+                success:function (data) {
+                    var temp = `<tr>
+                             <td>员工编号</td>
+                             <td>员工姓名</td>
+                             <td>员工薪水</td>
+                             <td>入职时间</td>
+                              <td>操作</td>
+                           </tr>`;
+                    $.each(data,function (i,obj) {
+                        temp+=`
+                            <tr>
+                            <td>`+obj.empno+`</td>
+                            <td>`+obj.ename+`</td>
+                            <td>`+obj.sal+`</td>
+                            <td>`+obj.hiredate+`</td>
+                            <td><button  onclick="upd(`+obj.empno+`)">修改</button>
+                            <button onclick="del(`+obj.empno+`)">删除</button></td>
+                            </tr>`
+                    })
+                    $("#tab").html(temp);
+                }
+            })
+
+        })
+
+    })
+    function upd(empno) {
+        location.href="";
+        localStorage.setItem("empno",empno);
+    }
+    function del(empno) {
+        location.href="";
+        localStorage.setItem("empno",empno);
+    }
+</script>
+</body>
+</html>
